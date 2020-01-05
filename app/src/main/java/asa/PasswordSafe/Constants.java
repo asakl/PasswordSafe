@@ -5,7 +5,7 @@ class Constants {
     static String thisApp = "This";
     static String none = "None";
 
-    static String DBName = "PasswordSafeDB111.db";
+    static String DBName = "PasswordSafeDB.db";
     static String tableName = "DATA";
 
     static String firstLine = "First Line";
