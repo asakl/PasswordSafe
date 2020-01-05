@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DD000000"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/stack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="50dp">
+
+        <EditText
+            android:id="@+id/passInputOnMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="50dp"
+            android:clickable="false"
+            android:drawableRight="@android:drawable/ic_lock_idle_lock"
+            android:ems="10"
+            android:hint="@string/password_msg"
+            android:importantForAutofill="no"
+            android:inputType="textPassword"
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/hint"
+            android:textSize="22sp" />
+
+        <EditText
+            android:id="@+id/searchOnMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="50dp"
+            android:clickable="false"
+            android:drawableRight="@android:drawable/ic_menu_search"
+            android:ems="10"
+            android:hint="@string/search"
+            android:importantForAutofill="no"
+            android:inputType=""
+            android:textColor="#FFFFFF"
+            android:textColorHint="@color/hint"
+            android:textSize="22sp"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/okButtonOnMain"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/cyen_round_button"
+            android:onClick="OkButtonOnClick"
+            android:text="@string/ok_button_text"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/exitButtonOnMain"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/red_round_button"
+            android:onClick="MyExitButtonOnClick"
+            android:text="@string/exit"
+            android:textColor="@android:color/white"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/errorMsgOnMain"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/error_msg"
+            android:textColor="@android:color/white"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+
+        <ListView
+            android:id="@+id/infoListOnMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false" />
+    </LinearLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addInfoButtonOnMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:onClick="AddButtonOnClick"
+        android:visibility="invisible"
+        app:backgroundTint="@color/button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/password" />
+</android.support.constraint.ConstraintLayout>
