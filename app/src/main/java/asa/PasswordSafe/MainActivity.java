@@ -1,7 +1,7 @@
 package asa.PasswordSafe;
 
 import android.app.AlertDialog;
-import android.database.Cursor;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -26,7 +26,6 @@ import java.util.TreeMap;
 public class MainActivity extends AppCompatActivity {
 
     // define variables
-    EditText Password;                              // password text box
     DBWarpper db;                                   // database
     TreeMap<String, Pair<String, String>> info;     // passwords list
     String key;                                     // current password
@@ -37,11 +36,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.main_window);
 
         // get the password box and database
-        Password = findViewById(R.id.passInputOnMain);
         db = new DBWarpper(this);
-
+        showInfo();
         // init the search box
         EditText filter = findViewById(R.id.searchOnMain);
+        key = Constants.key;
+        Constants.key = "";
+
         filter.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
@@ -57,60 +58,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void OkButtonOnClick(View v){
-
-        if (checkPassword()) {
-            key = Password.getText().toString(); // get the curr password
-            showInfo(); // show password list
-
-            // set the UI
-            findViewById(R.id.infoListOnMain).setVisibility(View.VISIBLE);
-            findViewById(R.id.addInfoButtonOnMain).setVisibility(View.VISIBLE);
-            findViewById(R.id.errorMsgOnMain).setVisibility(View.INVISIBLE);
-            findViewById(R.id.okButtonOnMain).setVisibility(View.GONE);
-            findViewById(R.id.passInputOnMain).setVisibility(View.GONE);
-            findViewById(R.id.exitButtonOnMain).setVisibility(View.VISIBLE);
-            findViewById(R.id.searchOnMain).setVisibility(View.VISIBLE);
-        }
-        else {
-            // set UI
-            clearView();
-            findViewById(R.id.errorMsgOnMain).setVisibility(View.VISIBLE);
-        }
-    }
-
     public void MyExitButtonOnClick(View v){
-        // set UI
-        clearView();
-        ((EditText)findViewById(R.id.passInputOnMain)).setText("");
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
-    public void clearView()
-    {
-        // set UI
-        findViewById(R.id.addInfoButtonOnMain).setVisibility(View.INVISIBLE);
-        findViewById(R.id.infoListOnMain).setVisibility(View.INVISIBLE);
-        findViewById(R.id.okButtonOnMain).setVisibility(View.VISIBLE);
-        findViewById(R.id.exitButtonOnMain).setVisibility(View.GONE);
-        findViewById(R.id.passInputOnMain).setVisibility(View.VISIBLE);
-        findViewById(R.id.searchOnMain).setVisibility(View.GONE);
-    }
 
-    private boolean checkPassword() {
-        String pass = Password.getText().toString(); // get password
-
-        Cursor res = db.getData(Constants.thisApp); // get all database
-
-        if (res.getCount() == 0){ // empty database?
-            // add password
-            db.insertData(Constants.thisApp, Constants.none, AES.encrypt(pass, pass));
-            return true;
-        }
-        else{ // not empty database
-            res.moveToNext(); // get password in database
-            return pass.equals(AES.decrypt(res.getString(3), pass)); // same password?
-        }
-    }
 
     private void showInfo(){
         // refresh the info list in UI
