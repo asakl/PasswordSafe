@@ -43,7 +43,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginRight="40dp"
             android:background="@drawable/cyen_round_button"
-            android:onClick="LoginButtonOnClick"
+            android:onClick="@string/onClickLogin"
             android:text="@string/ok_button_text"
             android:textColor="@android:color/white" />
 

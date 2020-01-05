@@ -10,4 +10,5 @@
     <string name="SiteName">name of site</string>
     <string name="exit">Exit</string>
     <string name="search">search</string>
+    <string name="onClickLogin">LoginButtonOnClick</string>
 </resources>

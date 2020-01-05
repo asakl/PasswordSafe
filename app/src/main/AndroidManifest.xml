@@ -2,6 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="asa.PasswordSafe">
 
+    <uses-feature android:name="android.hardware.fingerprint"
+        android:required="false"/>
+
+    <uses-permission
+        android:name="android.permission.USE_FINGERPRINT" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,12 +24,6 @@
 
         <activity android:name=".LoginActivity" android:label="Login"></activity>
         <activity android:name=".MainActivity" android:label="@string/app_name"></activity>
-
-
-
-
-
-
     </application>
 
 </manifest>

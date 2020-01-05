@@ -12,96 +12,103 @@ import java.util.TreeMap;
 
 public class DBWarpper extends SQLiteOpenHelper
 {
-    private final String COL2 = "SITE";
-    private final String COL3 = "NAME";
-    private final String COL4 = "PASSWORD";
-    private final String TABLE = Constants.tableName;
-
+    // create database (C'tor)
     DBWarpper(Context context){
         super(context, Constants.DBName, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE + " (ID INTEGER PRIMARY KEY, SITE TEXT, NAME TEXT, PASSWORD TEXT)");
+        // create the table
+        db.execSQL("create table " + Constants.tableName + " (ID INTEGER PRIMARY KEY, "
+                + Constants.siteCol + " TEXT, "
+                + Constants.nameCol + " TEXT, "
+                + Constants.passCol + " TEXT)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int j) {
-        db.execSQL("drop table if exists " + TABLE);
+        // update the table
+        db.execSQL("drop table if exists " + Constants.tableName);
         onCreate(db);
     }
 
     boolean insertData(String site, String name, String pass) {
+        // get db
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COL2, site);
-        contentValues.put(COL3, name);
-        contentValues.put(COL4, pass);
-        long result = db.insert(TABLE,null ,contentValues);
+
+        // put data
+        contentValues.put(Constants.siteCol, site);
+        contentValues.put(Constants.nameCol, name);
+        contentValues.put(Constants.passCol, pass);
+
+        // insert data
+        long result = db.insert(Constants.tableName,null ,contentValues);
         return result != -1;
     }
 
-    Cursor getData(String name) {
+    Cursor getData(String site) {
+        // get rows by site
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("select * from " + TABLE + " where " + COL2 + " = '" + name + "'",null);
+        return db.rawQuery("select * from " + Constants.tableName + " where " + Constants.siteCol + " = '" + site + "'",null);
     }
 
+    // get all data
     private Cursor getAllData() {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.rawQuery("select * from " + TABLE,null);
+        return db.rawQuery("select * from " + Constants.tableName,null);
     }
 
+    // comparator by lowercase index
+    private class myCmp implements Comparator<String>{
+        @Override
+        public int compare(String s1, String s2) {
+            int res = s1.toLowerCase().compareTo(s2.toLowerCase());
+            if(res == 0) {
+                return s1.compareTo(s2);
+            }
+            return res;
+        }
+    }
+
+
+    // get part of the data
     TreeMap<String, Pair<String, String>> selectPart(String str){
+        // get db
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from " + TABLE + " where SITE like '" + str + "%'", null);
-        TreeMap<String, Pair<String, String>> map = new TreeMap<>(new Comparator<String>() {
-            @Override
-            public int compare(String s1, String s2) {
-                int res = s1.toLowerCase().compareTo(s2.toLowerCase());
-                if(res == 0) {
-                    return s1.compareTo(s2);
-                }
-                return res;
-            }
-        });
+        Cursor res = db.rawQuery("select * from " + Constants.tableName + " where " + Constants.siteCol + " like '" + str + "%'", null);
 
+        // new try map of sort
+        TreeMap<String, Pair<String, String>> map = new TreeMap<>(new myCmp());
+
+        // get all data in map
         while(res.moveToNext()) {
-            map.put(res.getString(res.getColumnIndex(COL2)), new Pair<>(res.getString(res.getColumnIndex(COL3)), res.getString(res.getColumnIndex(COL4))));
+            map.put(res.getString(res.getColumnIndex(Constants.siteCol)),
+                    new Pair<>(res.getString(res.getColumnIndex(Constants.nameCol)), res.getString(res.getColumnIndex(Constants.passCol))));
         }
 
         return map;
     }
 
-    void deleteData(String name) {
+    // delete row
+    void deleteData(String site) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE, "SITE = '" + name + "'", null);
+        db.delete(Constants.tableName, Constants.siteCol + " = '" + site + "'", null);
     }
 
+    // get all data in map
     TreeMap<String, Pair<String, String>> getAllDataMap() {
-        TreeMap<String, Pair<String, String>> map = new TreeMap<>(new Comparator<String>() {
-            @Override
-            public int compare(String s1, String s2) {
-                int res = s1.toLowerCase().compareTo(s2.toLowerCase());
-                if(res == 0) {
-                    return s1.compareTo(s2);
-                }
-                return res;
-            }
-        });
-        Cursor res = getAllData();
-
-        while(res.moveToNext()) {
-            map.put(res.getString(res.getColumnIndex(COL2)), new Pair<>(res.getString(res.getColumnIndex(COL3)), res.getString(res.getColumnIndex(COL4))));
-        }
-
-        return map;
+        return selectPart("");
     }
 
+    // change pass
     void changePassword(String oldPass, String newPass){
 
+        // get all data map
         TreeMap<String, Pair<String, String>> map = getAllDataMap();
 
+        // for all sites - change encryption
         for (Map.Entry<String, Pair<String, String>> entry : map.entrySet()) {
             String site = entry.getKey();
             String name = entry.getValue().first;
@@ -111,6 +118,7 @@ public class DBWarpper extends SQLiteOpenHelper
             insertData(site, name, AES.encrypt(pass, newPass));
         }
 
+        // change this site password and encryption
         deleteData(Constants.thisApp);
         insertData(Constants.thisApp, Constants.none, AES.encrypt(newPass, newPass));
 
