@@ -25,43 +25,45 @@ import java.util.TreeMap;
 
 public class MainActivity extends AppCompatActivity {
 
-    EditText Password;
-    DBWarpper db;
-    TreeMap<String, Pair<String, String>> info;
-    String key;
+    // define variables
+    EditText Password;                              // password text box
+    DBWarpper db;                                   // database
+    TreeMap<String, Pair<String, String>> info;     // passwords list
+    String key;                                     // current password
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_window);
 
+        // get the password box and database
         Password = findViewById(R.id.passInputOnMain);
         db = new DBWarpper(this);
 
+        // init the search box
         EditText filter = findViewById(R.id.searchOnMain);
         filter.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // get all of the database that the site name like what in the search box
                 showInfo(db.selectPart(charSequence.toString()));
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) { }
         });
     }
 
     public void OkButtonOnClick(View v){
 
         if (checkPassword()) {
-            key = Password.getText().toString();
-            showInfo();
+            key = Password.getText().toString(); // get the curr password
+            showInfo(); // show password list
+
+            // set the UI
             findViewById(R.id.infoListOnMain).setVisibility(View.VISIBLE);
             findViewById(R.id.addInfoButtonOnMain).setVisibility(View.VISIBLE);
             findViewById(R.id.errorMsgOnMain).setVisibility(View.INVISIBLE);
@@ -71,18 +73,21 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.searchOnMain).setVisibility(View.VISIBLE);
         }
         else {
+            // set UI
             clearView();
             findViewById(R.id.errorMsgOnMain).setVisibility(View.VISIBLE);
         }
     }
 
     public void MyExitButtonOnClick(View v){
+        // set UI
         clearView();
         ((EditText)findViewById(R.id.passInputOnMain)).setText("");
     }
 
     public void clearView()
     {
+        // set UI
         findViewById(R.id.addInfoButtonOnMain).setVisibility(View.INVISIBLE);
         findViewById(R.id.infoListOnMain).setVisibility(View.INVISIBLE);
         findViewById(R.id.okButtonOnMain).setVisibility(View.VISIBLE);
@@ -92,41 +97,39 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean checkPassword() {
-        String pass = Password.getText().toString();
+        String pass = Password.getText().toString(); // get password
 
-        Cursor res = db.getData("This");
+        Cursor res = db.getData(Constants.thisApp); // get all database
 
-
-        if (res.getCount() == 0){
-            db.insertData("This", "None", AES.encrypt(pass, pass));
+        if (res.getCount() == 0){ // empty database?
+            // add password
+            db.insertData(Constants.thisApp, Constants.none, AES.encrypt(pass, pass));
             return true;
         }
-        else{
-            res.moveToNext();
-            return pass.equals(AES.decrypt(res.getString(3), pass));
+        else{ // not empty database
+            res.moveToNext(); // get password in database
+            return pass.equals(AES.decrypt(res.getString(3), pass)); // same password?
         }
     }
 
     private void showInfo(){
+        // refresh the info list in UI
         showInfo(db.getAllDataMap());
     }
 
     private void showInfo(TreeMap<String, Pair<String, String>> m){
-         info = m;
+        info = m; // get the info list
 
-
+        // init the list
         ListView listView = findViewById(R.id.infoListOnMain);
         List<HashMap<String, String>> list = new ArrayList<>();
 
-        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.item_on_list, new String[]{"First Line"}, new int[]{R.id.text1});
+        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.item_on_list, new String[]{Constants.firstLine}, new int[]{R.id.text1});
 
-        Iterator it = info.entrySet().iterator();
-
-        while (it.hasNext())
-        {
+        for (Map.Entry<String, Pair<String, String>> stringPairEntry : info.entrySet()) {
             HashMap<String, String> resultsMap = new HashMap<>();
 
-            resultsMap.put("First Line", ((Map.Entry<String, Pair<String, String>>)it.next()).getKey());
+            resultsMap.put(Constants.firstLine, (stringPairEntry).getKey());
 
             list.add(resultsMap);
         }
@@ -159,8 +162,8 @@ public class MainActivity extends AppCompatActivity {
                 String name = ((EditText)mainDialog.findViewById(R.id.usernameOnAdd)).getText().toString();
                 String pass = ((EditText)mainDialog.findViewById(R.id.passOnAdd)).getText().toString();
 
-                if(site.equals("This")){
-                    Toast.makeText(MainActivity.this, "YOU CAN'T ADD THIS SITE!", new Integer(0)).show();
+                if(site.equals(Constants.thisApp)){
+                    Toast.makeText(MainActivity.this, Constants.addNameError, new Integer(0)).show();
                 }
                 else{
                     boolean in = db.insertData(site, name, AES.encrypt(pass, key));
@@ -191,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
         ((TextView)dialog.findViewById(R.id.nameOnEdit)).setText((res.getValue()).first);
         ((TextView)dialog.findViewById(R.id.passOnEdit)).setText(AES.decrypt((res.getValue()).second, key));
 
-        if(res.getKey().equals("This")){
+        if(res.getKey().equals(Constants.thisApp)){
             dialog.findViewById(R.id.deleteButtonOnEdit).setVisibility(View.INVISIBLE);
         }
         else {
@@ -220,8 +223,7 @@ public class MainActivity extends AppCompatActivity {
         View dialog = LayoutInflater.from(this).inflate(R.layout.add_item_popup, null);
         final AlertDialog mainDialog = new AlertDialog.Builder(this).create();
 
-
-        if(site.equals("This"))
+        if(site.equals(Constants.thisApp))
         {
             ((EditText) dialog.findViewById(R.id.siteNameOnAdd)).setText(site);
             ((EditText) dialog.findViewById(R.id.siteNameOnAdd)).setEnabled(false);
@@ -242,20 +244,21 @@ public class MainActivity extends AppCompatActivity {
         dialog.findViewById(R.id.okButtonOnAdd).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText name = mainDialog.findViewById(R.id.usernameOnAdd);
-                EditText pass = mainDialog.findViewById(R.id.passOnAdd);
-                EditText site = mainDialog.findViewById(R.id.siteNameOnAdd);
+                String name = ((EditText)mainDialog.findViewById(R.id.usernameOnAdd)).getText().toString();
+                String pass = ((EditText)mainDialog.findViewById(R.id.passOnAdd)).getText().toString();
+                String site = ((EditText)mainDialog.findViewById(R.id.siteNameOnAdd)).getText().toString();
 
-                if(str.equals("This")) {
-                    db.changePassword(key, pass.getText().toString());
+                if(str.equals(Constants.thisApp)) {
+                    db.changePassword(key, pass);
+                    key = pass;
                     showInfo();
                 }
-                else if(site.getText().toString().equals("This")){
-                    Toast.makeText(MainActivity.this, "YOU CAN'T CHANGE TO THIS SITE!", new Integer(0)).show();
+                else if(site.equals(Constants.thisApp)){
+                    Toast.makeText(MainActivity.this, Constants.editNameError, new Integer(0)).show();
                 }
                 else{
                     db.deleteData(str);
-                    boolean in = db.insertData(site.getText().toString(), name.getText().toString(), AES.encrypt(pass.getText().toString(), key));
+                    boolean in = db.insertData(site, name, AES.encrypt(pass, key));
                     if(in){
                         showInfo();
                     }
