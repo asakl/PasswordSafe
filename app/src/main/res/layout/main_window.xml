@@ -28,6 +28,7 @@
             android:clickable="false"
             android:drawableRight="@android:drawable/ic_menu_search"
             android:ems="10"
+            android:fontFamily="casual"
             android:hint="@string/search"
             android:importantForAutofill="no"
             android:inputType=""
@@ -72,4 +73,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/password" />
+
 </android.support.constraint.ConstraintLayout>

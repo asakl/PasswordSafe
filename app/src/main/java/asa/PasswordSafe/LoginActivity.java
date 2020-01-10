@@ -3,14 +3,18 @@ package asa.PasswordSafe;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
-    DBWarpper db;
-    EditText Password;
+    private DBWarpper db;
+    private EditText Password;
+    private long backPressedTime;
+    private Toast exitToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +24,20 @@ public class LoginActivity extends AppCompatActivity {
         db = new DBWarpper(this);
     }
 
-    public void LoginButtonOnClick(View v){
+    @Override
+    public void onBackPressed() {
+        if(backPressedTime + 2000 > System.currentTimeMillis()){
+            exitToast.cancel();
+            this.finishAffinity();
+        }
+        else{
+            exitToast = Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT);
+            exitToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
+    }
 
+    public void LoginButtonOnClick(View v){
         if (checkPassword()) {
             findViewById(R.id.errorMsgOnLogin).setVisibility(View.INVISIBLE);
             Constants.key = Password.getText().toString();
@@ -31,8 +47,6 @@ public class LoginActivity extends AppCompatActivity {
         else {
             findViewById(R.id.errorMsgOnLogin).setVisibility(View.VISIBLE);
         }
-
-
     }
 
     private boolean checkPassword() {
@@ -50,6 +64,4 @@ public class LoginActivity extends AppCompatActivity {
             return pass.equals(AES.decrypt(res.getString(3), pass)); // same password?
         }
     }
-
-
 }

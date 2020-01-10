@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     DBWarpper db;                                   // database
     TreeMap<String, Pair<String, String>> info;     // passwords list
     String key;                                     // current password
+    private long backPressedTime;
+    private Toast exitToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +59,21 @@ public class MainActivity extends AppCompatActivity {
             public void afterTextChanged(Editable editable) { }
         });
     }
+
+    @Override
+    public void onBackPressed() {
+        if(backPressedTime + 2000 > System.currentTimeMillis()){
+            exitToast.cancel();
+            MyExitButtonOnClick(null);
+        }
+        else{
+            exitToast = Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT);
+            exitToast.show();
+        }
+        backPressedTime = System.currentTimeMillis();
+
+    }
+
 
     public void MyExitButtonOnClick(View v){
         Intent intent = new Intent(this, LoginActivity.class);
@@ -220,5 +237,4 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
 }
