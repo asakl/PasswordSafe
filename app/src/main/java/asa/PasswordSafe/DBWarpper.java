@@ -18,19 +18,6 @@ public class DBWarpper extends SQLiteOpenHelper
         super(context, Constants.DBName, null, 1);
     }
 
-    private void copyDB(Context context)
-    {
-        SQLiteDatabase oldDB = SQLiteDatabase.openDatabase(Constants.OldDBName, null, SQLiteDatabase.OPEN_READONLY);
-        Cursor c = oldDB.rawQuery("select * from " + Constants.tableName,null);
-
-        // get all data in map
-        while(c.moveToNext()) {
-            this.insertData(c.getString(c.getColumnIndex(Constants.siteCol)),c.getString(c.getColumnIndex(Constants.nameCol)), c.getString(c.getColumnIndex(Constants.passCol)));
-        }
-
-        //context.deleteDatabase(Constants.OldDBName);
-    }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         // create the table
