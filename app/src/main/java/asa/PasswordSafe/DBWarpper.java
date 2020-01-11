@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.*;
 import android.util.Pair;
 
+import java.io.File;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -15,6 +16,19 @@ public class DBWarpper extends SQLiteOpenHelper
     // create database (C'tor)
     DBWarpper(Context context){
         super(context, Constants.DBName, null, 1);
+    }
+
+    private void copyDB(Context context)
+    {
+        SQLiteDatabase oldDB = SQLiteDatabase.openDatabase(Constants.OldDBName, null, SQLiteDatabase.OPEN_READONLY);
+        Cursor c = oldDB.rawQuery("select * from " + Constants.tableName,null);
+
+        // get all data in map
+        while(c.moveToNext()) {
+            this.insertData(c.getString(c.getColumnIndex(Constants.siteCol)),c.getString(c.getColumnIndex(Constants.nameCol)), c.getString(c.getColumnIndex(Constants.passCol)));
+        }
+
+        //context.deleteDatabase(Constants.OldDBName);
     }
 
     @Override
@@ -33,19 +47,26 @@ public class DBWarpper extends SQLiteOpenHelper
         onCreate(db);
     }
 
-    boolean insertData(String site, String name, String pass) {
+    long insertData(String site, String name, String pass) {
         // get db
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        // put data
-        contentValues.put(Constants.siteCol, site);
-        contentValues.put(Constants.nameCol, name);
-        contentValues.put(Constants.passCol, pass);
+        Cursor c = getData(site);
 
-        // insert data
-        long result = db.insert(Constants.tableName,null ,contentValues);
-        return result != -1;
+        if(c.getCount() != 0){
+            return 1;
+        }
+        else {
+            // put data
+            contentValues.put(Constants.siteCol, site);
+            contentValues.put(Constants.nameCol, name);
+            contentValues.put(Constants.passCol, pass);
+
+            // insert data
+            long result = db.insert(Constants.tableName, null, contentValues);
+            return result == -1 ? -1 : 0;
+        }
     }
 
     Cursor getData(String site) {
@@ -123,5 +144,4 @@ public class DBWarpper extends SQLiteOpenHelper
         insertData(Constants.thisApp, Constants.none, AES.encrypt(newPass, newPass));
 
     }
-
 }

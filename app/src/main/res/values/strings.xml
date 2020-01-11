@@ -2,7 +2,7 @@
     <string name="app_name">PasswordSafe</string>
     <string name="ok_button_text">OK</string>
     <string name="password_msg">Please Enter Password</string>
-    <string name="error_msg">ERROR! invalid password!</string>
+    <string name="error_msg">ERROR! incorrect password!</string>
     <string name="pass">password</string>
     <string name="name">username</string>
     <string name="edit">Edit</string>

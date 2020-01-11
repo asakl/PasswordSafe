@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -39,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         // get the password box and database
         db = new DBWarpper(this);
+
         showInfo();
         // init the search box
         EditText filter = findViewById(R.id.searchOnMain);
@@ -136,9 +138,12 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, Constants.addNameError, new Integer(0)).show();
                 }
                 else{
-                    boolean in = db.insertData(site, name, AES.encrypt(pass, key));
-                    if(in){
+                    long in = db.insertData(site, name, AES.encrypt(pass, key));
+                    if(in == 0){
                         showInfo();
+                    }
+                    else if (in == 1){
+                        Toast.makeText(MainActivity.this, "The site is already exist", Toast.LENGTH_LONG).show();
                     }
                 }
                 mainDialog.dismiss();
@@ -228,8 +233,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else{
                     db.deleteData(str);
-                    boolean in = db.insertData(site, name, AES.encrypt(pass, key));
-                    if(in){
+                    long in = db.insertData(site, name, AES.encrypt(pass, key));
+                    if(in == 1){
                         showInfo();
                     }
                 }
