@@ -15,6 +15,8 @@ class Constants {
 
     static String addNameError = "YOU CAN'T ADD THIS SITE!";
     static String editNameError = "YOU CAN'T CHANGE TO THIS SITE!";
+    static int color = -1;
+
 
     static String key;
 }

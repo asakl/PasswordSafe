@@ -5,14 +5,9 @@ import android.database.Cursor;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
-import android.util.Pair;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import java.io.File;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -24,9 +19,19 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_window);
-        Password = findViewById(R.id.passInputOnLogin);
         db = new DBWarpper(this);
+        if(Constants.color == -1) {
+            Constants.color = db.getColor();
+        }
+        if(Constants.color == 0)
+        {
+            setContentView(R.layout.login_window_dark);
+        }
+        else {
+            setContentView(R.layout.login_window_light);
+        }
+        Password = findViewById(R.id.passInputOnLogin);
+
     }
 
     @Override

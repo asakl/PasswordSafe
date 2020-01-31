@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dialog_background"
+    android:background="@color/lightDialogBackground"
     android:minWidth="400dp"
     android:minHeight="200dp"
     android:orientation="vertical">
@@ -17,7 +17,7 @@
         android:inputType=""
         android:isScrollContainer="false"
         android:textColor="@android:color/white"
-        android:textColorHint="@color/hint" />
+        android:textColorHint="@color/lightHint" />
 
     <EditText
         android:id="@+id/usernameOnAdd"
@@ -27,7 +27,7 @@
         android:layout_margin="10dp"
         android:hint="@string/name"
         android:textColor="@android:color/white"
-        android:textColorHint="@color/hint"
+        android:textColorHint="@color/lightHint"
         android:inputType="" />
 
     <EditText
@@ -40,7 +40,7 @@
         android:importantForAutofill="no"
         android:inputType=""
         android:textColor="@android:color/white"
-        android:textColorHint="@color/hint" />
+        android:textColorHint="@color/lightHint" />
 
     <Button
         android:id="@+id/okButtonOnAdd"

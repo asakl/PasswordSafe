@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightBackground"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/stackOnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/lightBackground"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="50dp"
+        tools:layout_editor_absoluteY="50dp">
+
+        <ImageView
+            android:id="@+id/LogoInLogin"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:visibility="visible"
+            app:srcCompat="@drawable/black_logo" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:foregroundGravity="left"
+            android:textColorHint="@color/lightHint"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/lightHint"
+            android:layoutDirection="ltr"
+            >
+
+            <EditText
+                android:id="@+id/passInputOnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="30dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="50dp"
+                android:clickable="false"
+                android:ems="10"
+                android:fontFamily="casual"
+                android:hint="@string/password_msg"
+                android:importantForAutofill="no"
+                android:inputType="textPassword"
+                android:textColor="#000000"
+                android:textColorHint="@color/lightHint"
+                android:textSize="22sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/okButtonOnLogin"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/cyen_round_button"
+            android:onClick="@string/onClickLogin"
+            android:text="@string/ok_button_text"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/errorMsgOnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="casual"
+            android:gravity="center"
+            android:text="@string/error_msg"
+            android:textColor="@android:color/black"
+            android:textSize="30sp"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -3,6 +3,7 @@ package asa.PasswordSafe;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.DialogTitle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Pair;
@@ -16,7 +17,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,7 +36,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_window);
+        if(Constants.color == 0) {
+            setContentView(R.layout.main_window_dark);
+        }
+        else {
+            setContentView(R.layout.main_window_light);
+        }
 
         // get the password box and database
         db = new DBWarpper(this);
@@ -96,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.infoListOnMain);
         List<HashMap<String, String>> list = new ArrayList<>();
 
-        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.item_on_list, new String[]{Constants.firstLine}, new int[]{R.id.text1});
+        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.item_on_list_dark, new String[]{Constants.firstLine}, new int[]{R.id.text1});
 
         for (Map.Entry<String, Pair<String, String>> stringPairEntry : info.entrySet()) {
             HashMap<String, String> resultsMap = new HashMap<>();
@@ -120,7 +125,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void AddButtonOnClick(View v){
-        View dialog = LayoutInflater.from(this).inflate(R.layout.add_item_popup, null);
+        View dialog;
+        if(Constants.color == 0) {
+            dialog = LayoutInflater.from(this).inflate(R.layout.add_item_popup_dark, null);
+        }
+        else {
+            dialog = LayoutInflater.from(this).inflate(R.layout.add_item_popup_light, null);
+        }
         final AlertDialog mainDialog = new AlertDialog.Builder(this).create();
 
         mainDialog.setView(dialog);
@@ -152,7 +163,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ListOnClick(AdapterView<?> adapter, View v, int position, long id){
-        View dialog = LayoutInflater.from(this).inflate(R.layout.popup_list_on_click, null);
+        View dialog;
+        if(Constants.color == 0) {
+            dialog = LayoutInflater.from(this).inflate(R.layout.popup_list_on_click_dark, null);
+        }
+        else {
+            dialog = LayoutInflater.from(this).inflate(R.layout.popup_list_on_click_light, null);
+        }
         final AlertDialog mainDialog = new AlertDialog.Builder(this).create();
         mainDialog.setView(dialog);
         mainDialog.show();
@@ -194,8 +211,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void edit(View v,String site, String name, String pass){
-
-        View dialog = LayoutInflater.from(this).inflate(R.layout.add_item_popup, null);
+        View dialog;
+        if(Constants.color == 0) {
+            dialog = LayoutInflater.from(this).inflate(R.layout.add_item_popup_dark, null);
+        }
+        else {
+            dialog = LayoutInflater.from(this).inflate(R.layout.add_item_popup_light, null);
+        }
         final AlertDialog mainDialog = new AlertDialog.Builder(this).create();
 
         if(site.equals(Constants.thisApp))

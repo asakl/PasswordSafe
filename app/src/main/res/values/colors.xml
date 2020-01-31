@@ -3,9 +3,11 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#195A12</color>
-    <color name="background">#DD111111</color>
-    <color name="dialog_background">#DD222222</color>
+    <color name="darkBackground">#DD111111</color>
+    <color name="darkDialogBackground">#DD222222</color>
     <color name="button">#DD921D1D</color>
-    <color name="hint">#90FFFFFF</color>
-    <color name="editColor">#B38A05</color>
+    <color name="darkHint">#90FFFFFF</color>
+    <color name="lightHint">#90000000</color>
+    <color name="lightBackground">#F8F8FF</color>
+    <color name="lightDialogBackground">#A0A0AA</color>
 </resources>

@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DD000000"
+    android:background="@color/darkBackground"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/stackOnLogin"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="@color/darkBackground"
         android:gravity="center|top"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="50dp"
@@ -30,9 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:foregroundGravity="left"
-            android:textColorHint="@color/hint"
+            android:textColorHint="@color/darkHint"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="@color/hint"
+            app:passwordToggleTint="@color/darkHint"
             android:layoutDirection="ltr"
             >
 
@@ -51,7 +51,7 @@
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
                 android:textColor="#FFFFFF"
-                android:textColorHint="@color/hint"
+                android:textColorHint="@color/darkHint"
                 android:textSize="22sp" />
         </android.support.design.widget.TextInputLayout>
 

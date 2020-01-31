@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.*;
 import android.util.Pair;
 
-import java.io.File;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -15,23 +14,26 @@ public class DBWarpper extends SQLiteOpenHelper
 {
     // create database (C'tor)
     DBWarpper(Context context){
-        super(context, Constants.DBName, null, 1);
+        super(context, Constants.DBName, null, 2);
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        System.out.println("ddddddd");
         // create the table
         db.execSQL("create table " + Constants.tableName + " (ID INTEGER PRIMARY KEY, "
                 + Constants.siteCol + " TEXT, "
                 + Constants.nameCol + " TEXT, "
                 + Constants.passCol + " TEXT)");
+        db.execSQL("create table AppInfo (ID INTEGER PRIMARY KEY, COLOR INTEGER)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int j) {
         // update the table
-        db.execSQL("drop table if exists " + Constants.tableName);
-        onCreate(db);
+        db.execSQL("create table AppInfo (ID INTEGER PRIMARY KEY, COLOR INTEGER)");
+        //onCreate(db);
     }
 
     long insertData(String site, String name, String pass) {
@@ -60,6 +62,34 @@ public class DBWarpper extends SQLiteOpenHelper
         // get rows by site
         SQLiteDatabase db = this.getWritableDatabase();
         return db.rawQuery("select * from " + Constants.tableName + " where " + Constants.siteCol + " = '" + site + "'",null);
+    }
+
+    public void changeColor(int c)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("COLOR", c);
+
+        if (db.rawQuery("select * from AppInfo",null).getCount() != 0) {
+            db.delete("AppInfo", "*", null);
+        }
+        db.insert("AppInfo", null, contentValues);
+    }
+
+    public int getColor()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        try{
+            Cursor res = db.rawQuery("select * from AppInfo", null);
+            res.moveToNext();
+            return Integer.parseInt(res.getString(res.getColumnIndex("COLOR")));
+        }
+        catch (Exception e){
+            //db.rawQuery("create table AppInfo (ID INTEGER PRIMARY KEY, COLOR INTEGER)", null);
+            System.err.println(e.getMessage());
+            changeColor(0);
+        }
+        return 0;
     }
 
     // get all data

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="@color/darkDialogBackground"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/nameOnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clickable="false"
+        android:textColor="@color/colorPrimary"
+        android:textIsSelectable="true"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/passOnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:clickable="false"
+        android:textColor="@color/colorPrimary"
+        android:textIsSelectable="true"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/editButtonOnEdit"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@drawable/green_round_button"
+        android:text="@string/edit"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/deleteButtonOnEdit"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@drawable/red_round_button"
+        android:text="@string/delete"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

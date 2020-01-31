@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#DD000000"
+    android:background="@color/lightBackground"
     tools:context=".MainActivity">
 
     <LinearLayout
         android:id="@+id/stack"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background"
+        android:background="@color/lightBackground"
         android:gravity="center"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="50dp"
@@ -32,8 +32,8 @@
             android:hint="@string/search"
             android:importantForAutofill="no"
             android:inputType=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="@color/hint"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/lightHint"
             android:textSize="22sp"
             android:visibility="visible" />
 
@@ -47,7 +47,7 @@
             android:background="@drawable/red_round_button"
             android:onClick="MyExitButtonOnClick"
             android:text="@string/exit"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:visibility="visible" />
 
         <ListView
