@@ -4,12 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/lightBackground">
+    android:background="#111111">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10sp"
+        android:background="@color/darkBackground"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="10dp"
@@ -23,7 +24,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="@string/themes"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <TextView
@@ -35,7 +36,7 @@
             android:focusable="true"
             android:focusableInTouchMode="false"
             android:text="@string/languages"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <Switch
@@ -47,7 +48,7 @@
             android:checked="true"
             android:gravity="center"
             android:text="@string/darkTheme"
-            android:textColor="@android:color/black"
+            android:textColor="@android:color/white"
             android:textSize="20sp" />
 
         <TextView
@@ -57,7 +58,7 @@
             android:layout_margin="10sp"
             android:gravity="center"
             android:text="@string/appInfo"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/white" />
 
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

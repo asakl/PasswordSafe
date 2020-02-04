@@ -8,14 +8,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CompoundButton;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Switch;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -38,14 +31,13 @@ public class SettingsActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b)
                 {
-                    Toast.makeText(getBaseContext(), "on", Toast.LENGTH_SHORT).show();
-                    setContentView(R.layout.settings_window_dark);
                     Constants.color = 0;
+                    recreate();
+
                 }
                 else {
-                    Toast.makeText(getBaseContext(), "off", Toast.LENGTH_SHORT).show();
-                    setContentView(R.layout.settings_window_light);
                     Constants.color = 1;
+                    recreate();
                 }
             }
         });

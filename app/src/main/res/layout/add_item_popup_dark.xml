@@ -7,40 +7,68 @@
     android:minHeight="200dp"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/siteNameOnAdd"
-        android:layout_width="300dp"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:hint="@string/SiteName"
-        android:inputType=""
-        android:isScrollContainer="false"
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/darkHint" />
-
-    <EditText
-        android:id="@+id/usernameOnAdd"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:hint="@string/name"
-        android:textColor="@android:color/white"
+        android:layout_marginTop="10dp"
+        android:foregroundGravity="left"
         android:textColorHint="@color/darkHint"
-        android:inputType="" />
+        android:layoutDirection="ltr"
+        >
+        <EditText
+            android:id="@+id/siteNameOnAdd"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:hint="@string/SiteName"
+            android:inputType=""
+            android:isScrollContainer="false"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/darkHint" />
+    </android.support.design.widget.TextInputLayout>
 
-    <EditText
-        android:id="@+id/passOnAdd"
-        android:layout_width="300dp"
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="10dp"
-        android:hint="@string/pass"
-        android:importantForAutofill="no"
-        android:inputType=""
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/darkHint" />
+        android:layout_marginTop="10dp"
+        android:foregroundGravity="left"
+        android:textColorHint="@color/darkHint"
+        android:layoutDirection="ltr"
+        >
+        <EditText
+            android:id="@+id/usernameOnAdd"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:hint="@string/name"
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/darkHint"
+            android:inputType="" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:foregroundGravity="left"
+        android:textColorHint="@color/darkHint"
+        android:layoutDirection="ltr"
+        >
+        <EditText
+            android:id="@+id/passOnAdd"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:hint="@string/pass"
+            android:importantForAutofill="no"
+            android:inputType=""
+            android:textColor="@android:color/white"
+            android:textColorHint="@color/darkHint" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/okButtonOnAdd"
