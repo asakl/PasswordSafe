@@ -71,7 +71,7 @@ public class DBWarpper extends SQLiteOpenHelper
         contentValues.put("COLOR", c);
 
         if (db.rawQuery("select * from AppInfo",null).getCount() != 0) {
-            db.delete("AppInfo", "*", null);
+            db.delete("AppInfo", "ID = 1", null);
         }
         db.insert("AppInfo", null, contentValues);
     }

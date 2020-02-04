@@ -27,13 +27,13 @@ public class ThemeActivity extends AppCompatActivity
                 switch (i){
                     case R.id.darkButton:
                         Constants.color = 0;
-                        setContentView(R.layout.theme_window_dark);
                         db.changeColor(0);
+                        recreate();
                         break;
                     case R.id.lightButton:
                         Constants.color = 1;
-                        setContentView(R.layout.theme_window_light);
                         db.changeColor(1);
+                        recreate();
                         break;
                     case R.id.customButton:
                         //Constants.color = 1;

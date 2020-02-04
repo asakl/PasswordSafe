@@ -92,8 +92,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case R.id.mainMenuSettings:
-                Intent intent = new Intent(this, SettingsActivity.class);
+            case R.id.themesOnMenu:
+                Intent intent = new Intent(this, ThemeActivity.class);
                 startActivity(intent);
                 break;
             default:

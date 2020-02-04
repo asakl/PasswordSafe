@@ -2,8 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/mainMenuSettings"
-        android:title="@string/settings"
-        app:showAsAction="never" />
+        android:id="@+id/themesOnMenu"
+        android:title="@string/themes" />
+    <item
+        android:id="@+id/lanuagesOnMenu"
+        android:title="@string/languages" />
+    <item
+        android:id="@+id/aboutOnMenu"
+        android:title="@string/about" />
 
 </menu>
