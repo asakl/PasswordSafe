@@ -19,6 +19,7 @@
     <string name="customTheme">Custom Theme</string>
     <string name="back">Back</string>
     <string name="backMsg">Prees back to exit</string>
-    <string name="appInfo" translatable="false">© Asa Klein</string>
+    <string name="appInfo">created by Asa klein</string>
+    <string name="contact">you can contact me in the email: ---</string>
     <string name="about">About</string>
 </resources>

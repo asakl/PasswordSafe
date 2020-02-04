@@ -96,6 +96,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, ThemeActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.aboutOnMenu:
+                intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                break;
             default:
                 return super.onOptionsItemSelected(item);
         }

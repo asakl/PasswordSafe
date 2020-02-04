@@ -19,4 +19,7 @@
     <string name="backMsg">לחץ חזור כדי לצאת</string>
     <string name="lightTheme">מצב בהיר</string>
     <string name="customTheme">מצב מותאם אישית</string>
+    <string name="about">מידע על האפליקציה</string>
+    <string name="contact">ניתן ליצור קשר דרך המייל: ---</string>
+    <string name="appInfo">נוצר על ידי אסא קליין</string>
 </resources>
