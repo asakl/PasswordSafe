@@ -64,7 +64,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="20sp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
         android:onClick="AddButtonOnClick"
@@ -72,6 +71,6 @@
         app:backgroundTint="@color/button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/password" />
+        app:srcCompat="@drawable/plus" />
 
 </android.support.constraint.ConstraintLayout>
