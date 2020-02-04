@@ -3,7 +3,6 @@ package asa.PasswordSafe;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.DialogTitle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Pair;
@@ -101,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         ListView listView = findViewById(R.id.infoListOnMain);
         List<HashMap<String, String>> list = new ArrayList<>();
 
-        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.item_on_list_dark, new String[]{Constants.firstLine}, new int[]{R.id.text1});
+        SimpleAdapter adapter = new SimpleAdapter(this, list, R.layout.item_on_list, new String[]{Constants.firstLine}, new int[]{R.id.text1});
 
         for (Map.Entry<String, Pair<String, String>> stringPairEntry : info.entrySet()) {
             HashMap<String, String> resultsMap = new HashMap<>();
