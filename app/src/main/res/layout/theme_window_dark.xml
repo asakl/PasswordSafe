@@ -15,7 +15,7 @@
 
         <RadioButton
             android:id="@+id/darkButton"
-            android:layout_width="wrap_content"
+            android:layout_width="200sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
@@ -24,7 +24,7 @@
 
         <RadioButton
             android:id="@+id/lightButton"
-            android:layout_width="wrap_content"
+            android:layout_width="200sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
@@ -33,7 +33,7 @@
 
         <RadioButton
             android:id="@+id/customButton"
-            android:layout_width="wrap_content"
+            android:layout_width="200sp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="10dp"
