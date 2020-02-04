@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PasswordSafe</string>
+    <string name="SiteName">שם האתר</string>
+    <string name="delete">מחיקה</string>
+    <string name="edit">ערוך</string>
+    <string name="error_msg">שגיאה! הסיסמה לא נכונה!</string>
+    <string name="exit">יציאה</string>
+    <string name="name">שם־משתמש</string>
+    <string name="pass">סיסמה</string>
+    <string name="password_msg">בבקשה הכנס סיסמה</string>
+    <string name="search">חיפוש</string>
+    <string name="settings">הגדרות</string>
+    <string name="darkTheme">מצב כהה</string>
+    <string name="ok_button_text" translatable="false">אוקיי</string>
+    <string name="back">חזור</string>
+    <string name="languages">שפות</string>
+    <string name="themes">ערכות נושא</string>
+    <string name="backMsg">לחץ חזור כדי לצאת</string>
+    <string name="lightTheme">מצב בהיר</string>
+    <string name="customTheme">מצב מותאם אישית</string>
+</resources>
