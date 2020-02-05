@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         // init the search box
         EditText filter = findViewById(R.id.searchOnMain);
         key = Constants.key;
-        Constants.key = "";
+        //Constants.key = "";
 
         filter.addTextChangedListener(new TextWatcher() {
             @Override

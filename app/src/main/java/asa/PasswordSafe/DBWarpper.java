@@ -20,7 +20,6 @@ public class DBWarpper extends SQLiteOpenHelper
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        System.out.println("ddddddd");
         // create the table
         db.execSQL("create table " + Constants.tableName + " (ID INTEGER PRIMARY KEY, "
                 + Constants.siteCol + " TEXT, "
